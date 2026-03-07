@@ -7,27 +7,22 @@ A premium e-commerce platform for fire safety equipment, inspired by Shopee and 
 - **Client**: Next.js (React) + Tailwind CSS
 - **Server**: Node.js + Express.js
 
-## Getting Started
+## Quick Start (Run everything in one terminal)
 
-### 1. Server Setup
+1. **Install all dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Launch Client & Server**:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-cd server
-npm install
-npm run dev
-```
+The marketplace will be available at `http://localhost:3000` and the API at `http://localhost:5000`.
 
-The server will run on `http://localhost:5000`.
+## Manual Setup (Separate Terminals)
 
-### 2. Client Setup
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-The client will run on `http://localhost:3000`.
+...
 
 ## Features
 
