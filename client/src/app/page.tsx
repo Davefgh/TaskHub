@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+import Link from 'next/link';
+
 interface Product {
   id: number;
   name: string;
@@ -49,7 +51,7 @@ export default function Home() {
             </div>
           </div>
           <nav className="flex items-center gap-6 text-shopee-dark">
-            <button className="text-sm font-semibold hover:text-[#e53935] transition-colors">Login</button>
+            <Link href="/login" className="text-sm font-semibold hover:text-[#e53935] transition-colors">Login</Link>
             <button className="bg-[#e53935] text-white px-5 py-2 rounded-sm text-sm font-bold hover:bg-[#b71c1c] transition-all shadow-sm">
                Sign Up
              </button>
