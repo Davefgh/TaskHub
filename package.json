@@ -1,24 +1,23 @@
 {
-  "name": "fes",
+  "name": "taskhub",
   "version": "1.0.0",
-  "description": "A premium e-commerce platform for fire safety equipment, inspired by Shopee and Lazada.",
-  "main": "index.js",
+  "description": "A comprehensive Jira-like task management system",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "start": "npm run start:server",
+    "start:server": "cd server && npm start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Davefgh/FireSafety.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Davefgh/FireSafety/issues"
-  },
-  "homepage": "https://github.com/Davefgh/FireSafety#readme",
   "devDependencies": {
-    "concurrently": "^9.2.1"
-  }
+    "concurrently": "^8.2.0"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
 }
