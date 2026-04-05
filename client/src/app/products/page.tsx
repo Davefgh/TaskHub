@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -17,6 +18,9 @@ interface Product {
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Mocking as logged in
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/products')
@@ -50,10 +54,52 @@ export default function ProductsPage() {
             </div>
           </div>
           <nav className="flex items-center gap-6 text-shopee-dark">
-            <Link href="/login" className="text-sm font-semibold hover:text-[#e53935] transition-colors">Login</Link>
-            <button className="bg-[#e53935] text-white px-5 py-2 rounded-sm text-sm font-bold hover:bg-[#b71c1c] transition-all shadow-sm">
-               Sign Up
-             </button>
+            {!isLoggedIn ? (
+              <>
+                <Link href="/login" className="text-sm font-semibold hover:text-[#e53935] transition-colors">Login</Link>
+                <Link href="/register" className="bg-[#e53935] text-white px-5 py-2 rounded-sm text-sm font-bold hover:bg-[#b71c1c] transition-all shadow-sm">
+                   Sign Up
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className="cursor-pointer text-gray-700 hover:text-[#e53935] transition-colors" title="Profile">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <div className="relative">
+                  <button 
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="cursor-pointer text-gray-700 hover:text-[#e53935] transition-colors flex items-center"
+                    title="Settings"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924-1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </button>
+                  
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-100 z-[100]">
+                      <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#e53935] transition-colors">
+                         Edit Profile
+                      </button>
+                      <button 
+                         onClick={() => {
+                           setIsLoggedIn(false);
+                           setDropdownOpen(false);
+                           router.push('/register');
+                         }}
+                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#e53935] transition-colors border-t border-gray-50"
+                      >
+                         Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
              <div className="relative cursor-pointer text-gray-700 hover:text-[#e53935] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
