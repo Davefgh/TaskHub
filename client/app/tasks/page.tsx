@@ -125,12 +125,20 @@ export default function TasksPage() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Tasks</h2>
-          <Link
-            href="/tasks/create"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Create Task
-          </Link>
+          <div className="space-x-4">
+            <Link
+              href="/tasks/board"
+              className="inline-block px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50"
+            >
+              Board View
+            </Link>
+            <Link
+              href="/tasks/create"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              Create Task
+            </Link>
+          </div>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6 mb-8">
